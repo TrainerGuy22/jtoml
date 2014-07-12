@@ -32,8 +32,8 @@ public class SimpleTomlWriter implements TomlWriter {
 				builder.append("[" + key + "]\n");
 				Map<String, Object> map = (Map<String, Object>) result;
 				for(String key1 : map.keySet()) {
-					Object result1 = config.get(key1);
-					builder.append(key + " = " + parse(result) + "\n");
+					Object result1 = map.get(key);
+					builder.append(key + " = " + parse(result1) + "\n");
 				}
 				builder.append("\n\n");
 			} else {
