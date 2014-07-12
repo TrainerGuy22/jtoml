@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
  *
  * @author <a href="mailto:a.grison@gmail.com">$Author: Alexandre Grison$</a>
 */
-public class Toml implements Parser, Getter {
+public class Toml implements Parser, Getter, Writer {
     private static final Logger LOGGER = Logger.getLogger(Toml.class.getName());
     /** The default {@link TomlParser} loaded from {@link ServiceLoader}. Defaults to {@link SimpleTomlParser} if none found*/
     private static TomlParser defaultParser;
@@ -349,4 +349,13 @@ public class Toml implements Parser, Getter {
             LOGGER.log(Level.WARNING, "No TomlParser service loaded, defaulting to: " + defaultParser.getClass().getName());
         }
     }
+
+	@Override
+	public void write(File file, Map<String, Object> contents) {
+		try {
+			(new SimpleTomlWriter(file)).write(contents);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
