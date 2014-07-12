@@ -1,6 +1,4 @@
-package me.grison.jtoml.impl;
-
-import me.grison.jtoml.*;
+package org.github.trainerguy22.jtoml.impl;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,16 +10,8 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Toml parsing class front-end.
- * 
- * <code>
- *     Toml toml = Toml.parse("pi = 3.141592653589793");
- *     Double pi = toml.getDouble("pi");
- * </code>
- *
- * @author <a href="mailto:a.grison@gmail.com">$Author: Alexandre Grison$</a>
-*/
+import org.github.trainerguy22.jtoml.*;
+
 public class Toml {
 	
     private static final Logger LOGGER = Logger.getLogger(Toml.class.getName());

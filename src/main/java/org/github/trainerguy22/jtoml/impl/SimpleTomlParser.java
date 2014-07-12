@@ -1,11 +1,11 @@
-package me.grison.jtoml.impl;
-
-import me.grison.jtoml.TomlParser;
-import me.grison.jtoml.Util;
+package org.github.trainerguy22.jtoml.impl;
 
 import java.util.*;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+
+import org.github.trainerguy22.jtoml.TomlParser;
+import org.github.trainerguy22.jtoml.Util;
 
 /**
  * Builtin Toml parser.

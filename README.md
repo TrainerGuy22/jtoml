@@ -1,37 +1,16 @@
 TOML for Java
 ===
-This is a parser for Tom Preson-Werner's (@mojombo) [TOML](https://raw.github.com/mojombo/toml/) markup language, using Java.
+This is a parser for a subset of the [TOML](https://raw.github.com/mojombo/toml/) markup language, using Java.
 
-[![Build Status](https://travis-ci.org/agrison/jtoml.png?branch=master)](https://travis-ci.org/agrison/jtoml)
-
-Get it
+Differences from normal TOML
 ----
 
-jtoml is published in the sonatype nexus repository.
-In order to use it, you may add this repository in your `pom.xml`:
+jTOML only supports groups one layer thick, you can't have groups inside groups like TOML.
 
-```xml
-<repositories>
-  <repository>
-    <id>sonatype-nexus-snapshots</id>
-    <url>https://oss.sonatype.org/content/groups/public/</url>
-    <!-- If you want snapshots versions -->
-    <snapshots>
-      <enabled>true</enabled>
-    </snapshots>
-  </repository>
-</repositories>
-```
+Disclaimer
+----
 
-Add the jtoml dependency:
-
-```xml
-<dependency>
-  <groupId>me.grison</groupId>
-  <artifactId>jtoml</artifactId>
-  <version>1.0.0</version>
-</dependency>
-```
+I forked this primarially for my own personal usage. The tests are out of date, and documentation can be lacking. I might improve on these in the future.
 
 Usage
 ----
@@ -39,16 +18,17 @@ Usage
 ### Parsing
 
 ```java
-Toml toml = Toml.parse("pi = 3.14\nfoo = \"bar\""); // parse a String
+String<String, Object> toml = Toml.parse("pi = 3.14\nfoo = \"bar\""); // parse a String
 toml = Toml.parse(new File("foo.toml")); // or a file
 ```
 
 ### Getting values
 
-The `Toml` class support different types of getters so that you can retrieve a specific type or the underlying `Object` without casting.
+The `TomlWrapper` class support different types of getters so that you can retrieve a specific type or the underlying `Object` without casting.
 
 ```java
 // get different types
+TomlWrapper toml = new TomlWrapper(Toml.parse(new File("foo.toml")));
 toml.get("foo"); // Object
 toml.getString("foo"); // String
 toml.getBoolean("foo"); // Boolean
@@ -59,88 +39,9 @@ toml.getList("foo"); // List<Object>
 toml.getMap("foo"); // Map<String, Object>
 ```
 
-### Mapping custom types
-
-You can map a custom type from an entire TOML String or part of it.
-Let's say you would like to map the following TOML to a `Player` entity.
-
-```toml
-[player]
-nickName = "foo"
-score = 42
-```
-
-You could do it as simple as following:
-```java
-// or Custom objects
-public class Player {
-    String name;
-    Long score;
-}
-Toml toml = Toml.parse("[player]\nname = \"foo\"\nscore = 42");
-Player player = toml.getAs("player", Player.class);
-player.name; // "foo"
-player.score; // 42L
-```
+jTOML also supports generating TOML files.
 
 **Note:** Supported types are `Long`, `String`, `Double`, `Boolean`, `Calendar`, `List`, `Map` or Objects having the pre-cited types only.
-
-### Serialization
-
-JToml supports also serialization. Indeed, you can serialize a custom type to a String having the TOML format representing the original object.
-Imagine the following custom Objects:
-
-```java
-public class Stats {
-    Long maxSpeed;
-    Double weight;
-    // Constructors
-}
-
-public class Car {
-    String brand;
-    String model;
-    Stats stats;
-    Boolean legendary;
-    Calendar date;
-    List<String> options;
-    // Constructors
-}
-
-Car f12Berlinetta = new Car("Ferrari", "F12 Berlinetta", true, "2012-02-29",
-    360, 1525.5, Arrays.asList("GPS", "Leather", "Nitro")
-);
-String toml = Toml.serialize("f12b", f12Berlinetta);
-```
-
-The call to `Toml.serialize()` will produce the following TOML format:
-```toml
-[f12b]
-brand = "Ferrari"
-model = "F12 Berlinetta"
-legendary = true
-date = 2012-02-29T00:00:00Z
-options = ["GPS", "Leather", "Nitro"]
-
-[f12b.stats]
-maxSpeed = 347
-weight = 1525.5
-```
-
-You can also serialize the current instance of a `Toml` object:
-```java
-Toml toml = Toml.parse("[player]\nname = \"foo\"\nscore = 42");
-toml.serialize();
-```
-
-Will produce the following TOML String
-```toml
-[player]
-name = "foo"
-score = 42
-```
-
-**Note:** Like for custom types above, supported types are `Long`, `String`, `Double`, `Boolean`, `Calendar`, `List`, `Map` or Objects having the pre-cited types only.
 
 
 License

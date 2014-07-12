@@ -1,4 +1,4 @@
-package me.grison.jtoml;
+package org.github.trainerguy22.jtoml;
 
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -1,4 +1,4 @@
-package me.grison.jtoml.impl;
+package org.github.trainerguy22.jtoml.impl;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -7,8 +7,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import me.grison.jtoml.TomlWriter;
-import me.grison.jtoml.Util;
+import org.github.trainerguy22.jtoml.TomlWriter;
+import org.github.trainerguy22.jtoml.Util;
 
 public class SimpleTomlWriter implements TomlWriter {
 	

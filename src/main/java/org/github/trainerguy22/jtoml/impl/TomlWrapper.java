@@ -1,4 +1,4 @@
-package me.grison.jtoml.impl;
+package org.github.trainerguy22.jtoml.impl;
 
 import java.lang.reflect.Field;
 import java.util.Calendar;
@@ -8,8 +8,8 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import me.grison.jtoml.Getter;
-import me.grison.jtoml.Util;
+import org.github.trainerguy22.jtoml.Getter;
+import org.github.trainerguy22.jtoml.Util;
 
 public class TomlWrapper implements Getter {
 	

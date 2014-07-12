@@ -1,4 +1,4 @@
-package me.grison.jtoml;
+package org.github.trainerguy22.jtoml;
 
 import java.util.Calendar;
 import java.util.List;
