@@ -80,7 +80,7 @@ public class Toml {
             if (SimpleTomlParser.class.equals(parser.getClass()) && parser != null) {
                 continue;
             }
-            parser = parser;
+            Toml.parser = parser;
         }
         // last-chance fallback
         if (parser == null) {
