@@ -18,7 +18,7 @@ Usage
 ### Parsing
 
 ```java
-String<String, Object> toml = Toml.parse("pi = 3.14\nfoo = \"bar\""); // parse a String
+Map<String, Object> toml = Toml.parse("pi = 3.14\nfoo = \"bar\""); // parse a String
 toml = Toml.parse(new File("foo.toml")); // or a file
 ```
 
