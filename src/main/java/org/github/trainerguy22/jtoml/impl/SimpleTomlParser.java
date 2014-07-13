@@ -56,8 +56,8 @@ public class SimpleTomlParser implements TomlParser {
         add(new Handler(KEY_EQUALS + DATE) { Object cast(String v) { try { return Util.ISO8601.toCalendar(v); } catch (Exception e) { return null; } }});
         // doubles
         add(new Handler(KEY_EQUALS + DOUBLE + SPACES + POSSIBLE_COMMENT) {Object cast(String v) {return Double.valueOf(v);}});
-        // longs
-        add(new Handler(KEY_EQUALS + DIGITS + SPACES + POSSIBLE_COMMENT) {Object cast(String v) {return Long.valueOf(v);}});
+        // integers
+        add(new Handler(KEY_EQUALS + DIGITS + SPACES + POSSIBLE_COMMENT) {Object cast(String v) {return (int) Math.max(Math.min(Integer.MAX_VALUE, Long.valueOf(v)), Integer.MIN_VALUE);}});
         // strings
         add(new Handler(KEY_EQUALS + STRING + SPACES) {Object cast(String v) {return Util.TomlString.unescape(v.trim());}});
         // booleans

@@ -41,8 +41,8 @@ public class TomlWrapper implements Getter {
     }
 
     @Override
-    public Long getLong(String key) {
-        return get(key, Long.class);
+    public Integer getInt(String key) {
+        return get(key, Integer.class);
     }
 
     @Override

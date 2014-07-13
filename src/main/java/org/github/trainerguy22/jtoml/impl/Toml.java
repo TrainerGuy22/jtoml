@@ -50,33 +50,8 @@ public class Toml {
         return parseString(Util.FileToString.read(file));
 	}
 
-    /*
-     * Uses a ServiceLoader to locate available {@link TomlParser} on classpath.
-     * If none is found, the default {@link SimpleTomlParser} is used
-     *
-     * @throws IllegalStateException if too much {@link TomlParser} are found on classpath.
-     */
     private static void initDefaultParser() {
-        List<TomlParser> parsers = new ArrayList<TomlParser>();
-        Iterator<TomlParser> parserIterator = ServiceLoader.load(TomlParser.class).iterator();
-        while(parserIterator.hasNext()) parsers.add(parserIterator.next());
-        // check too much (built-in one always available + one additional is OK)
-        if (parsers.size() > 2) {
-            throw new IllegalStateException("Too much TomlParser found on classpath: " + parsers);
-        }
-        // iterate on all available parsers
-        for (TomlParser parser: parsers) {
-            LOGGER.log(Level.CONFIG, "Found TomlParser instance on classpath: " + parser.getClass().getName());
-            if (SimpleTomlParser.class.equals(parser.getClass()) && parser != null) {
-                continue;
-            }
-            Toml.parser = parser;
-        }
-        // last-chance fallback
-        if (parser == null) {
-            parser = new SimpleTomlParser();
-            LOGGER.log(Level.WARNING, "No TomlParser service loaded, defaulting to: " + parser.getClass().getName());
-        }
+    	parser = new SimpleTomlParser();
     }
 
 	public static void write(File file, Map<String, Object> config) {
